@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { css } from '@emotion/react';
 import Image from 'next/image';
-import { Box, Container, Text } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 
 const wrapper = css`
   position: relative;
@@ -29,16 +29,40 @@ const overlay = css`
 interface CardProps {
   thumbnail: string;
   name: string;
+  onOpen: any;
+  setSelectedBoat: any;
 }
 
-const BoatCard: React.FC<CardProps> = ({ thumbnail, name }) => {
+const BoatCard: React.FC<CardProps> = ({ thumbnail, name, onOpen, setSelectedBoat }) => {
+
+  const handleOnClick = () => {
+    setSelectedBoat({
+      src: thumbnail,
+      name,
+    })
+    onOpen();
+  };
+
   return (
-    <Container css={wrapper} mx={1}>
+    <Box
+      background="rgba(255, 255, 255, 0.4)"
+      maxW="sm"
+      borderRadius="lg"
+      overflow="hidden"
+      align="center"
+      justifyContent="center"
+      d="flex"
+      boxShadow="lg"
+      onClick={handleOnClick}
+      sx={{
+        cursor: 'pointer',
+      }}
+    >
       <Image src={thumbnail} alt={name} height={256} width={192} />
       <Box css={overlay}>
         <Text>{name}</Text>
       </Box>
-    </Container>
+    </Box>
   );
 };
 
