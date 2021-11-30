@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import { Box, Text } from '@chakra-ui/react';
@@ -39,7 +39,8 @@ const BoatCard: React.FC<CardProps> = ({ thumbnail, name, onOpen, setSelectedBoa
     setSelectedBoat({
       src: thumbnail,
       name,
-    })
+    });
+
     onOpen();
   };
 
